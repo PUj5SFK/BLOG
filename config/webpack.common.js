@@ -2,6 +2,7 @@ const path = require('path');
 module.exports = {
   entry: {
     index: './src/index.js',
+    framework: ['react','react-dom','styled-components']
   },
   output: {
     filename: './js/bundle.js',

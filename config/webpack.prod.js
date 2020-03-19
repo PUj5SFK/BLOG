@@ -15,9 +15,22 @@ module.exports = merge(common, {
       new OptimizeCssAssetsPlugin()
     ],
     splitChunks: {
+      chunks: 'all',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
       cacheGroups: {
-        react: {test: /[\\/]node_modules[\\/]((react).*)[\\/]/,name: 'react',chunks: 'all'},
-        // common: {test: /[\\/]node_modules[\\/]/,name: 'common',chunks: 'all'},
+         framework: {
+          test: "framework",
+          name: "framework",
+          enforce: true
+        },
+        vendors: {
+          priority: -10,
+          test: /node_modules/,
+          name: "vendor",
+          enforce: true,
+        }, 
       }
     }
   },
@@ -25,9 +38,9 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.css$/,
-        use: [ 
-          MiniCssExtractPlugin.loader, 
-          'css-loader' 
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
         ]
       },
       {
@@ -56,11 +69,10 @@ module.exports = merge(common, {
       template: 'public/index.html'
     }),
     new CleanWebpackPlugin({
-      dry: true,
     }),
     // new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css',
+      filename: 'css/[name].[hash:8].css',
       chunkFilename: 'css/[id].[hash].css',
     })
   ]
