@@ -58,7 +58,7 @@ module.exports = merge(common, {
     new CleanWebpackPlugin({
       dry: true,
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash].css',
       chunkFilename: 'css/[id].[hash].css',
